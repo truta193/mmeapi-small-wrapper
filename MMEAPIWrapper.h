@@ -71,7 +71,7 @@ luint* GetControlValues(HMIXER handle, MIXERLINE line, MIXERCONTROL control){
     return returnValues;
 };
 
-void SetControlValues(HMIXER handle, MIXERLINE line, MIXERCONTROL control, uint *values) {
+void SetControlValues(HMIXER handle, MIXERLINE line, MIXERCONTROL control, luint *values) {
     MIXERCONTROLDETAILS mixerControlDetails;
     MIXERCONTROLDETAILS_UNSIGNED value[line.cChannels];
     mixerControlDetails.cbStruct = sizeof(MIXERCONTROLDETAILS);
@@ -93,5 +93,23 @@ uint GetControlValueMinimum(MIXERCONTROL control){
 uint GetControlValueMaximum(MIXERCONTROL control) {
     return control.Bounds.dwMaximum;
 };
+
+uint AuxGetNumberOfDevices() {
+    return auxGetNumDevs();
+};
+
+void AuxGetVolume(uint id, uint *result) {
+    auxGetVolume(id, result);
+};
+
+void AuxSetVolume(uint id, uint value) {
+    auxSetVolume(id, value);
+};
+
+void AuxGetDeviceCaps(uint id, AUXCAPS *auxCaps) {
+    auxGetDevCaps(id, auxCaps, sizeof(AUXCAPS));
+};
+
+
 
 #endif //_M_M_E_A_P_I_WRAPPER_H
